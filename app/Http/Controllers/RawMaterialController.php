@@ -31,8 +31,9 @@ class RawMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request);
+        // Obtengo todos los datos del input
+        $input_data = $request->collect();
+        dd($input_data);
     }
 
     /**

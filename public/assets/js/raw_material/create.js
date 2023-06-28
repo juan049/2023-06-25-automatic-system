@@ -1,4 +1,68 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+       /*
+    Componentes----------------------------------------------------------
+     */
+    //Defino la tabla y los arr
+    const componentsTable = document.querySelector('#components-table');
+    let deleteButtons = componentsTable.querySelectorAll('.btnDeleteRow');
+    let newRowButtons = componentsTable.querySelectorAll('.btnNewRow');
+
+   
+    //A cada  boton le hago foreach y pongo un event listener
+    deleteButtons.forEach(button=>{
+        button.addEventListener('click', (e)=>{
+            //Defino el body de la table
+            const tBody = button.closest('tbody');
+            //Defino un arrat de tr
+            const trArray = tBody.querySelectorAll('tr');
+            //Defino el tr padre
+            const parentTr = e.target.closest('tr');
+
+            //Elimino el TR solo si el trArray es mayor a 1
+            if(trArray.length > 1){
+            parentTr.remove();  
+            }
+        });
+    });
+
+    newRowButtons.forEach(button => {
+        button.addEventListener('click', (e)=>{
+            //Defino el body de la table
+            const tBody = button.closest('tbody');
+            //Defino un arrat de tr
+            const trArray = tBody.querySelectorAll('tr');
+            //Defino el tr padre
+            const parentTr = e.target.closest('tr');
+
+            //Creo la fila
+            let newTr = document.createElement('tr');
+            //Defino el html de la fila
+            const rowInnerHtml = `
+            <td>
+                <button type="button" class="btn btn-success btnNewRow">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            </td>
+            <td scope="col"><input type="text" class="inputComponentName"></td>
+            <td scope="col"><input type="number" min=0 max=100 class="inputComponentPercentage"></td>
+            <td scope="col"><input type="text" class="inputComponentCAS"></td>
+            <td>
+                <button type="button" class="btn btn-danger btnDeleteRow">
+                    <i class="bi bi-x-lg fw-bold"></i>
+                </button>
+            </td>`;
+
+            newTr.innerHTML=rowInnerHtml;
+
+          //inserto
+          parentTr.insertBefore(newTr, tr.nextSibling);
+
+        });
+    })
+
+
+
+
     /*
     Areas--------------------------------------------------------------
     */
@@ -39,8 +103,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
         areasCheckboxValuesArr[id] = value;
         areasInputHidden.value = JSON.stringify(areasCheckboxValuesArr);
     }
-
-    /*
-    Componentes----------------------------------------------------------
-     */
 });

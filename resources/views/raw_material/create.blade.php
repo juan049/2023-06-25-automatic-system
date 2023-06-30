@@ -52,20 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
 
-                                <td><button type="button" class="btn btn-success btnNewRow"><i class="bi bi-plus-lg"></i>
-                                </td>
-                                <td scope="col"><input type="text" class="inputComponentName"></td>
-                                <td scope="col"><input type="number" min=0 max=100 class="inputComponentPercentage">
-                                </td>
-                                <td scope="col"><input type="text" class="inputComponentCAS"></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btnDeleteRow">
-                                        <i class="bi bi-x-lg fw-bold"></i>
-                                    </button>
-                                </td>
-                            </tr>
 
 
                         </tbody>

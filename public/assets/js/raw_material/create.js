@@ -60,17 +60,67 @@ document.addEventListener("DOMContentLoaded", (event) => {
         addAddRowFunction(newTr.querySelector(".btnNewRow"));
 
         //Añado event listener a los inputs
+        //Name
+        const inputComponentName = newTr.querySelector(".inputComponentName");
 
-        //Añado un event listener
+        inputComponentName.addEventListener("input", (e) => {
+            //Defino un array de tr
+            const trArray = getTrArray();
+            //Defino el tr padre
+            const parentTr = getParentTr(e.target);
+
+            //Obtengo el  index del TR
+            const trIndex = getTrIndex(parentTr);
+
+            //Cambio el rowInputsArr
+            rowInputsArr[trIndex].name = e.target.value;
+            updateComponentsInput();
+        });
+
+        //Percentage
+        const inputComponentPercentage = newTr.querySelector(
+            ".inputComponentPercentage"
+        );
+
+        inputComponentPercentage.addEventListener("input", (e) => {
+            //Defino un array de tr
+            const trArray = getTrArray();
+            //Defino el tr padre
+            const parentTr = getParentTr(e.target);
+
+            //Obtengo el  index del TR
+            const trIndex = getTrIndex(parentTr);
+
+            //Cambio el rowInputsArr
+            rowInputsArr[trIndex].percentage = e.target.value;
+            updateComponentsInput();
+        });
+
+        //CAS Number
+        const inputComponentCAS = newTr.querySelector(".inputComponentCAS");
+
+        inputComponentCAS.addEventListener("input", (e) => {
+            //Defino un array de tr
+            const trArray = getTrArray();
+            //Defino el tr padre
+            const parentTr = getParentTr(e.target);
+
+            //Obtengo el  index del TR
+            const trIndex = getTrIndex(parentTr);
+
+            //Cambio el rowInputsArr
+            rowInputsArr[trIndex].casNumber = e.target.value;
+            updateComponentsInput();
+        });
 
         //inserto despues de donde se dió añadir y si no se dió añadir, simplemente inserto
         if (parentTr) {
             tBody.insertBefore(newTr, parentTr.nextSibling);
             const insertedTrIndex = getTrIndex(parentTr) + 1;
             rowInputsArr.splice(insertedTrIndex, 0, {
-                name: "test",
-                percentage: 34.4,
-                casNumber: "354-345",
+                name: "",
+                percentage: 0,
+                casNumber: "",
             });
         } else {
             tBody.appendChild(newTr);
@@ -88,7 +138,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //Funciónn para que el boton borre la fila
     function addDeleteRowFunction(button) {
         button.addEventListener("click", (e) => {
-            //Defino un arrat de tr
+            //Defino un array de tr
             const trArray = getTrArray();
             //Defino el tr padre
             const parentTr = getParentTr(e.target);
@@ -114,7 +164,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //Función para agregar nueva fila
     function addAddRowFunction(button) {
         button.addEventListener("click", (e) => {
-            //Defino un arrat de tr
+            //Defino un array de tr
             const trArray = getTrArray();
             //Defino el tr padre
             const parentTr = getParentTr(e.target);

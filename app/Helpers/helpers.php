@@ -7,11 +7,21 @@ function form_input_text(
     $placeholder = 'Nombrar por favor',
     $div_class = 'form-group',
     $label_class = '',
-    $input_class = 'form-control'
+    $input_class = 'form-control',
+    $errors = null,
+    $value = '' 
 ) {
     $input = "<div class='$div_class'>";
     $input .= "<label for='$id_name' class='$label_class'>$label</label>";
-    $input .= "<input id='$id_name' name='$id_name' class='$input_class' type='text' placeholder='$placeholder'/>";
+    $input .= "<input id='$id_name' name='$id_name' class='$input_class' type='text' placeholder='$placeholder' value='$value'/>";
+    if($errors){
+        foreach($errors as $error) {
+            $input .= "<div class='alert alert-danger mt-3' role='alert'>
+                $error
+            </div>";
+        } 
+    }
+
     $input .= "</div> ";
     echo $input;
 }

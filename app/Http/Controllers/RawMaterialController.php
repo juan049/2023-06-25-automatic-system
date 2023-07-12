@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\RawMaterial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RawMaterialController extends Controller
 {
@@ -31,9 +32,32 @@ class RawMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        // Obtengo todos los datos del input
-        $input_data = $request->collect();
-        dd($input_data);
+
+        //Valido
+        $validated_raw_material = $request->validate([
+            'name' => 'required|string',
+            'brand' => 'required|string'
+        ]);
+
+        $areas = json_decode($request->input('areas'));
+        $components = json_decode($request->input('components'), true);
+        //Creo reglas para validar los componentes
+        $component_rules=[
+            "name" => 'required|string',
+           // "percentage" => 'numeric|min:0|max:100',
+            "casNumber"=>'required|string'
+        ];
+        //Valido que los componentes esten bien 
+        foreach($components as $component) {
+             $validator = Validator::make($component, $component_rules);
+            if ($validator->fails()) {
+                return redirect()->route('raw_material.create')
+                            ->withErrors($validator)
+                            ->withInput();
+            } 
+        }
+
+        dd($components);
     }
 
     /**

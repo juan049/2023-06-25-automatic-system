@@ -23,7 +23,7 @@
         <h1>Dar de alta un nuevo insumo</h1>
         <form action="{{ route('raw_material.store') }}" method="POST">
             @csrf
-
+            
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Datos generales</h5>
@@ -32,8 +32,16 @@
                         label: 'Nombre del químico',
                         placeholder: 'Nombre del químico',
                         div_class: 'mb-3',
+                        errors: $errors->get('name')
+                        value: ''
                     ) }}
-                    {{ form_input_text(id_name: 'brand', label: 'Marca del químico', placeholder: 'Marca del químico') }}
+                    
+                    {{ form_input_text(
+                        id_name: 'brand', 
+                        label: 'Marca del químico', 
+                        placeholder: 'Marca del químico',
+                        errors: $errors->get('brand')
+                    ) }}
                 </div>
             </div>
 

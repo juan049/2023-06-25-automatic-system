@@ -33,13 +33,26 @@ class RawMaterialController extends Controller
     public function store(Request $request)
     {
 
-        //Valido
+        //Valido nombre y marca
         $validated_raw_material = $request->validate([
             'name' => 'required|string',
             'brand' => 'required|string'
         ]);
 
-        $areas = json_decode($request->input('areas'));
+        //Valido que por lo menos un área esté seleccionada
+        //Creo array del input de areas
+        $areas_input = json_decode($request->input('areas'),true);
+        //Creo un Array de areas validadas
+        $validated_areas = [];
+        //Mediante Foreach meto las áreas seleccionadas en el array de validated_areas
+        foreach($areas_input as $key => $value) {
+            if($value){
+                $validated_areas[$key] = $value;
+            }
+        }
+        //Corroboro que por lo menos halla un área seleccionada
+        $areas_validator = Validator::make(validated_areas,)
+
         $components = json_decode($request->input('components'), true);
         //Creo reglas para validar los componentes
         $component_rules=[
@@ -47,7 +60,7 @@ class RawMaterialController extends Controller
            // "percentage" => 'numeric|min:0|max:100',
             "casNumber"=>'required|string'
         ];
-        //Valido que los componentes esten bien 
+        /* //Valido que los componentes esten bien 
         foreach($components as $component) {
              $validator = Validator::make($component, $component_rules);
             if ($validator->fails()) {
@@ -55,7 +68,7 @@ class RawMaterialController extends Controller
                             ->withErrors($validator)
                             ->withInput();
             } 
-        }
+        } */
 
         dd($components);
     }

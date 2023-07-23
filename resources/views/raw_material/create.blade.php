@@ -32,15 +32,17 @@
                         label: 'Nombre del químico',
                         placeholder: 'Nombre del químico',
                         div_class: 'mb-3',
-                        errors: $errors->get('name')
-                        value: ''
+                        errors: $errors->get('name'),
+                        value: old('name')
+                        
                     ) }}
                     
                     {{ form_input_text(
                         id_name: 'brand', 
                         label: 'Marca del químico', 
                         placeholder: 'Marca del químico',
-                        errors: $errors->get('brand')
+                        errors: $errors->get('brand'),
+                        value: old('brand')
                     ) }}
                 </div>
             </div>

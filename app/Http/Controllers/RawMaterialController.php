@@ -32,6 +32,8 @@ class RawMaterialController extends Controller
      */
     public function store(Request $request)
     {
+        //Creo un array de errores de validación
+        $validation_errors = [];
 
         //Valido nombre y marca
         $validated_raw_material = $request->validate([
@@ -41,24 +43,30 @@ class RawMaterialController extends Controller
 
         //Valido que por lo menos un área esté seleccionada
         //Creo array del input de areas
-        $areas_input = json_decode($request->input('areas'),true);
+        $areas_input = json_decode($request->input('areas'), true);
         //Creo un Array de areas validadas
         $validated_areas = [];
         //Mediante Foreach meto las áreas seleccionadas en el array de validated_areas
-        foreach($areas_input as $key => $value) {
-            if($value){
+        foreach ($areas_input as $key => $value) {
+            if ($value) {
                 $validated_areas[$key] = $value;
             }
         }
         //Corroboro que por lo menos halla un área seleccionada
-        $areas_validator = Validator::make(validated_areas,)
+        if (empty($validated_areas)) {
+            $validation_errors['areas'] = 'Se debe seleccionar por lo menos un área';
+
+            return redirect()->route('raw_material.create')
+                ->withInput()
+                ->with('validation_errors', $validation_errors);
+        };
 
         $components = json_decode($request->input('components'), true);
         //Creo reglas para validar los componentes
-        $component_rules=[
+        $component_rules = [
             "name" => 'required|string',
-           // "percentage" => 'numeric|min:0|max:100',
-            "casNumber"=>'required|string'
+            // "percentage" => 'numeric|min:0|max:100',
+            "casNumber" => 'required|string'
         ];
         /* //Valido que los componentes esten bien 
         foreach($components as $component) {

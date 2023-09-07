@@ -21,7 +21,7 @@
     </style>
     <div class="container">
         <h1>Dar de alta un nuevo insumo</h1>
-        {{ $validation_errors }}
+
 
         <form action="{{ route('raw_material.store') }}" method="POST">
             @csrf
@@ -76,6 +76,11 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Áreas de uso</h5>
+                    @if ($validation_errors['areas'])
+                        <h3>Validation</h3>
+                    @endif
+
+                    @endif
                     <div class="row mx-3">
                         <input type="hidden" name="areas" id="areas">
                         @foreach ($areas as $area)

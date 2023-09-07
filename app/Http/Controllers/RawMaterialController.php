@@ -68,15 +68,15 @@ class RawMaterialController extends Controller
             // "percentage" => 'numeric|min:0|max:100',
             "casNumber" => 'required|string'
         ];
-        /* //Valido que los componentes esten bien 
-        foreach($components as $component) {
-             $validator = Validator::make($component, $component_rules);
+        //Valido que los componentes esten bien 
+        foreach ($components as $component) {
+            $validator = Validator::make($component, $component_rules);
             if ($validator->fails()) {
                 return redirect()->route('raw_material.create')
-                            ->withErrors($validator)
-                            ->withInput();
-            } 
-        } */
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+        }
 
         dd($components);
     }
